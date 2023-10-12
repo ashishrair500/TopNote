@@ -4,34 +4,35 @@ import { useDispatch } from 'react-redux';
 import { signUpUser } from '../../redux/actionCreators/authActionCreator';
 import { Navigate, useNavigate } from 'react-router-dom';
 const RegisterForm = () => {
-    const[name, setName]=useState("");
+
+    const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [passwordConfirmation, setPasswordConfirmation] = useState("");
-const [success,setSuccess]=useState(false);
+    const [success, setSuccess] = useState(false);
 
 
     const dispatch = useDispatch();
-const navigate=useNavigate();
+    const navigate = useNavigate();
 
-const handleSubmit=(e)=>{
-    e.preventDefault();
-    if(!name||!password ||!passwordConfirmation){
-        alert("Please fill all the fields")
-    return;
-    }
-    if(password!==passwordConfirmation){
-        alert("password do not match");
-    return;
-    }
-    dispatch(signUpUser(name,email,password,setSucces0s)); 0//we are sending to the reducers; authActionCreator signup;
-};
-useEffect(()=>{
-if(success){                              //jaise hi authActionCreator signup , success ko true kr dega then user will redirect to the dashboard page
-    navigate("/dashboard")
-}
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (!name || !password || !passwordConfirmation) {
+            alert("Please fill all the fields")
+            return;
+        }
+        if (password !== passwordConfirmation) {
+            alert("password do not match");
+            return;
+        }
+        dispatch(signUpUser(name, email, password, setSuccess)); 0//we are sending to the redux; authActionCreator signup;
+    };
+    useEffect(() => {
+        if (success) {                              //jaise hi authActionCreator signup , success ko true kr dega then user will redirect to the dashboard page
+            navigate("/dashboard")
+        }
 
-})
+    })
     return (
         <form >
             <div className='form-group my-2'>

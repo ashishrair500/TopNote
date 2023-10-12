@@ -2,6 +2,7 @@ import React from 'react'
 import { useEffect } from 'react'
 import {  useSelector } from 'react-redux/es/hooks/useSelector'
 import { useNavigate } from 'react-router-dom'
+import Navbar from '../../components/DashboardComponents/Navbar/Navbar'
 
 const DashboardPage = () => {
 
@@ -16,7 +17,7 @@ useEffect(()=>{
 
   return (
     <div>
-      <h1>Welcome to the DashboardPage</h1>
+    <Navbar/>
     </div>
   )
 }

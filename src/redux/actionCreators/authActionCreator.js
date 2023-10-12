@@ -15,16 +15,16 @@ const logoutUser = () => {
 }
 
 //action creator
-//-----------------------------------------------------------------1--------------------------------------------------------------------------------------------
+//----------------------------------------------------------------action creator-1---------------------------------------------------------------------------
 
-export const signInUser = (email, password , setSuccess) => (dispatch) => {
+export const signInUser = (email, password, setSuccess) => (dispatch) => {
     console.log(email, password)
     fire.auth().signInWithEmailAndPassword(email, password).then(user => {
         dispatch(
             loginUser({
-                uid:user.user.uid,
-                displayName:user.user.displayName,
-                email:user.user.email,
+                uid: user.user.uid,
+                displayName: user.user.displayName,
+                email: user.user.email,
             })
         );
         setSuccess(true);
@@ -32,31 +32,30 @@ export const signInUser = (email, password , setSuccess) => (dispatch) => {
     }).catch(error => { alert("Invalid : User not exist") })
 };
 
-//---------------------------------------------2---------------------------------------------------------------------------------------------------------------
-//name,email,password,setSuccess are coming from RegisterForm through the use of dispatcher 
-/*after getting all these parameter user is created ,then after user created this method return a promise like 
-uid ,name,email,  and also setting setSucces to true;
-*/
-export const signUpUser = (name, email, password,setSuccess) => (dispatch) => {
+//-----------------------------------------------------action creator-2-----------------------------------------------------------------------------------------
+
+/*name,email,password,setSuccess are coming from RegisterForm through the use of dispatcher after getting all these parameter user is created ,then after usercreated this method return a promise like uid ,name,email,  and also setting setSucces to true. */
+
+export const signUpUser = (name, email, password, setSuccess) => (dispatch) => {
     fire.auth().createUserWithEmailAndPassword(email, password).then((user) => {
         fire
-        .auth()
-        .currentUser.updateProfile({
-            displayName: name,
-        }).then( () => {
-            //after login we are getting these things from the firebase
-            const currentUser = fire.auth().currentUser;
-            dispatch(loginUser({
-                uid:currentUser,
-                name:currentUser.displayName,
-                email:currentUser.email,
+            .auth()
+            .currentUser.updateProfile({
+                displayName: name,
+            }).then(() => {
+                //after login we are getting these things from the firebase
+                const currentUser = fire.auth().currentUser;
+                dispatch(loginUser({
+                    uid: currentUser,
+                    name: currentUser.displayName,
+                    email: currentUser.email,
+                })
+                );
+                setSuccess(true);
+                console.log(currentUser.user)
+            }).catch((error) => {
+                console.log(error)
             })
-        );
-setSuccess(true);
-           console.log(currentUser.user)
-        }).catch((error) => {
-            console.log(error)
-        })
 
     }).catch((error) => {
         if (error.code === "auth/email-already-in-use") {
@@ -71,32 +70,32 @@ setSuccess(true);
     })
 };
 
-//---------------------------------------------2---------------------------------------------------------------------------------------------------------------
+//-----------------------------------------------------------action creator-3-----------------------------------------------------------------------------------
 //to sign out user whenever it click on logout button
 
 export const signOutUser = (dispatch) => {
 
-fire.auth().signOut().then(()=>{
-    
-    dispatch(logoutUser());
+    fire.auth().signOut().then(() => {
 
-})
+        dispatch(logoutUser());
+
+    })
 }
 
 
-//--------------------------------------------------------------------------------3-----------------------------------------------------------------------------
+//---------------------------------------------------------------action creator-4-----------------------------------------------------------------------------
 //to check whether the user is logged in or not
-export const checkIsLoggedIn=()=>(dispatch)=>{
-    fire.auth().onAuthStateChanged((user)=>{
-if(user){
-    dispatch(
-        loginUser({
-            uid:user.uid,
-            displayName:user.displayName,
-            email:user.email,
-        })
-    );
-}
+export const checkIsLoggedIn = () => (dispatch) => {
+    fire.auth().onAuthStateChanged((user) => {
+        if (user) {
+            dispatch(
+                loginUser({
+                    uid: user.uid,
+                    displayName: user.displayName,
+                    email: user.email,
+                })
+            );
+        }
 
     })
 }
