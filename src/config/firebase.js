@@ -1,6 +1,6 @@
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
-
+import "firebase/compat/firestore" //to handle files
 
 const firebaseConfig = {
     apiKey: "AIzaSyBmJMZB_kDW3woqxnSyhNiQk3b5QrX0TSA",
@@ -12,4 +12,5 @@ const firebaseConfig = {
 databaseURL:'https://topnote-3baa4-default-rtdb.firebaseio.com/'  
 };
 const fire=firebase.initializeApp(firebaseConfig);
+
 export default fire;
