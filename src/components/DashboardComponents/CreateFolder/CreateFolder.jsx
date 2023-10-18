@@ -47,7 +47,7 @@ const CreateFolder = ({setIsCreateFolderOpen}) => {
             const data = {
               createdAt : new Date(),
               name : FolderName,
-              userId : user.uid,
+              userId : user.uid,          //adding: yaha pr bhi kuchh locha krna padega
               createdBy : user.displayName,
               path : currentFolder === "root" ? [] : ["Parent Folder Path"],
               parent : currentFolder ,

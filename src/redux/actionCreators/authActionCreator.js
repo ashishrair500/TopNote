@@ -1,12 +1,20 @@
+// what to do
+
 import * as types from "../actionTypes/authActionTypes";
 import fire from "../../config/firebase";
 
+/*
+Action:- Actions are the plain Javascript objects that have a type field. Actions only tell what to do , but they don't tell how to do
+*/
+//-------------------------------------------------------------actions--1---------------------------------------------------------------------------------------
+
 const loginUser = (payload) => {
-    return {
+    return {                          //this is a object called action object that has type field 
         type: types.SIGN_IN,
         payload
     };
 }
+//-------------------------------------------------------------actions--2---------------------------------------------------------------------------------------
 
 const logoutUser = () => {
     return {
@@ -22,7 +30,9 @@ export const signInUser = (email, password, setSuccess) => (dispatch) => {
     fire.auth().signInWithEmailAndPassword(email, password).then(user => {
         dispatch(
             loginUser({
-                uid: user.user.uid,
+                uid: user.user.uid,    /* yaha pr me apni id ko hard code kr dunga mtlab jab bhi koi user signUp karga tab firebase promise me user id return karta hai jis id ki hep se user apne files and folders ko access karta hai.lekin me yaha pr apni matlab admin ki user id ko hard code kr dunga taki jo files nad folder admin ke hai usse koi bhi user access kar sake;
+                create folder ,upload file , create file button ko disable kr denge ta jab userid !==admin id
+                */
                 displayName: user.user.displayName,
                 email: user.user.email,
             })
@@ -46,7 +56,7 @@ export const signUpUser = (name, email, password, setSuccess) => (dispatch) => {
                 //after login we are getting these things from the firebase
                 const currentUser = fire.auth().currentUser;
                 dispatch(loginUser({
-                    uid: currentUser,
+                    uid: currentUser.uid,
                     name: currentUser.displayName,
                     email: currentUser.email,
                 })
@@ -83,8 +93,8 @@ export const signOutUser = (dispatch) => {
 }
 
 
-//---------------------------------------------------------------action creator-4-----------------------------------------------------------------------------
-//to check whether the user is logged in or not
+//---------------------------------------------------------------action-creator-4-----------------------------------------------------------------------------
+//to check whether the user is logged in or not0
 export const checkIsLoggedIn = () => (dispatch) => {
     fire.auth().onAuthStateChanged((user) => {
         if (user) {
