@@ -23,6 +23,11 @@ const setLoading = (payload) => ({
     payload
 
 })
+//-------------------------------------------------------------actions--3---------------------------------------------------------------------------------------
+const setChangeFolder = (payload) => ({
+    type: types.CHANGE_FOLDER,
+    payload,
+})
 
 //action Creators
 /*Action Creator : Pure function which creates an action .Reusable , Portable and Easy to Test
@@ -43,7 +48,7 @@ export const createFolder = (data) => (dispatch) => {
 
 //----------------------------------------------------------------action--creator--2---------------------------------------------------------------------------
 //this to get all the folders of the user who is logged in
-export const getFolders = (userId) => (dispatch) => {
+/*export const getFolders = (userId) => (dispatch) => {
     dispatch(setLoading(true));
     fire
         .firestore()
@@ -52,21 +57,50 @@ export const getFolders = (userId) => (dispatch) => {
         .get()
         .then(async (folders) => {
             const foldersData = await folders.docs.map((folder) => ({
-            data:folder.data(),
-            docId:folder.id,
-           // folderName:folder.name,
-        }) 
+                data: folder.data(),
+                docId: folder.id,
+                // folderName:folder.name,
+            })
 
-        )
-       // console.log("FileFOlderactioncreator"+data);
+            )
+            // console.log("FileFOlderactioncreator"+data);
 
-        //this is to get all the folders from the firebase
+            //this is to get all the folders from the firebase
             dispatch(setLoading(false));      //if you have to check this again
-            dispatch(addFolders(foldersData));   
-
+          
+                dispatch(addFolders(foldersData));
+            
         });
+}*/
+
+
+export const getFolders = (userId) => async (dispatch) => {
+    dispatch(setLoading(true));
+
+    try {
+      const foldersSnapshot = await fire
+        .firestore()
+        .collection("folders")
+        .where("userId", "==", userId)
+        .get();
+  
+      const foldersData = foldersSnapshot.docs.map((folders) => ({
+        data: folders.data(),
+        docId: folders.id,
+      }));
+      dispatch(setLoading(false));      //if you have to check this again
+
+      dispatch(addFolders(foldersData));
+    } catch (error) {
+      // Handle errors, e.g., dispatch an error action
+      console.error("Error fetching folders:", error);
+      // You might want to dispatch an error action here
+    }
+  };
+  
+
+//----------------------------------------------------------------action--creator--3---------------------------------------------------------------------------
+
+export const changeFolder = (folderId) => (dispatch) => {
+    dispatch(setChangeFolder(folderId));
 }
-
-//----------------------------------------------------------------action--creator--2---------------------------------------------------------------------------
-
-

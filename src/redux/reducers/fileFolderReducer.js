@@ -22,14 +22,18 @@ const fileFoldersReducer = (state = initialState, action) => {
 
             return {
                 ...state,
-                userFolders: action.payload          
+                userFolders: action.payload
             };
         case types.SET_LOADING:      //is to get folder and loading
             return {
                 ...state,
                 isLoading: action.payload
             };
-
+        case types.CHANGE_FOLDER:
+            return {
+                ...state,
+                currentFolder: action.payload,
+            }
         default:
             return state;
     }
