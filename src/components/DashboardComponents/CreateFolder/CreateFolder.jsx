@@ -74,6 +74,7 @@ const CreateFolder = ({ setIsCreateFolderOpen }) => {
       alert('Folder name is required')
     }
   }
+  console.log(user.uid+"from createfolder component")
   return (
     <div
       className='col-md-12  position-fixed top-0 left-0 w-100'

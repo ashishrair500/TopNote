@@ -19,7 +19,6 @@ const fileFoldersReducer = (state = initialState, action) => {
                 userFolders: [...state.userFolders, action.payload]
             };
         case types.ADD_FOLDERS: //this is to get all the folders from the firebase
-
             return {
                 ...state,
                 userFolders: action.payload

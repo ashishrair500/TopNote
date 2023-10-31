@@ -30,10 +30,11 @@ const setChangeFolder = (payload) => ({
 })
 
 //action Creators
-/*Action Creator : Pure function which creates an action .Reusable , Portable and Easy to Test
+/*Action Creator : Pure function which creates an action. Reusable , Portable and Easy to Test
 */
 //------------------------------------------------------action---creator-----1----------------------------------------------------------------------------------
 export const createFolder = (data) => (dispatch) => {
+
     fire
         .firestore()
         .collection("folders")
@@ -48,15 +49,20 @@ export const createFolder = (data) => (dispatch) => {
 
 //----------------------------------------------------------------action--creator--2---------------------------------------------------------------------------
 //this to get all the folders of the user who is logged in
-/*export const getFolders = (userId) => (dispatch) => {
+export const getFolders = (userId) => async (dispatch) => {
     dispatch(setLoading(true));
+
     fire
         .firestore()
         .collection("folders")
-        .where("userId", "==", userId)
+        
+        //here i have replaced userId with admin id T3XBsF3xtDMgTRQIi7xVQYqffpe2
+
+        .where("userId", "==", "T3XBsF3xtDMgTRQIi7xVQYqffpe2")
         .get()
         .then(async (folders) => {
-            const foldersData = await folders.docs.map((folder) => ({
+
+            const foldersData = folders.docs.map((folder) => ({
                 data: folder.data(),
                 docId: folder.id,
                 // folderName:folder.name,
@@ -67,11 +73,11 @@ export const createFolder = (data) => (dispatch) => {
 
             //this is to get all the folders from the firebase
             dispatch(setLoading(false));      //if you have to check this again
-          
-                dispatch(addFolders(foldersData));
-            
+            dispatch(addFolders(foldersData));
         });
-}*/
+
+}
+/*
 
 
 export const getFolders = (userId) => async (dispatch) => {
@@ -98,7 +104,7 @@ export const getFolders = (userId) => async (dispatch) => {
     }
   };
   
-
+*/
 //----------------------------------------------------------------action--creator--3---------------------------------------------------------------------------
 
 export const changeFolder = (folderId) => (dispatch) => {

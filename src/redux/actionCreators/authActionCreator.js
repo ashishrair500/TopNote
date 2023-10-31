@@ -80,7 +80,7 @@ export const signUpUser = (name, email, password, setSuccess) => (dispatch) => {
     })
 };
 
-//-----------------------------------------------------------action creator-3-----------------------------------------------------------------------------------
+//-----------------------------------------------------------action--creator-3-----------------------------------------------------------------------------------
 //to sign out user whenever it click on logout button
 
 export const signOutUser = (dispatch) => {

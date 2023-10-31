@@ -9,13 +9,25 @@ const FolderComponent = () => {
     ({
         currentFolderData: state.filefolders.userFolders.find(
             (folder) => folder.docId === folderId
-        ).data,
+        )?.data,
         childFolders: state.filefolders.userFolders.filter(
             (folder) => folder.parent === folderId
         ),
     }),
         shallowEqual
     );
+    
+
+    if (!currentFolderData) {
+        return (
+            <p className='text-center my-5'>
+                Folder not found
+            </p>
+        );
+    }
+
+
+
     return (
         <div>
             {
@@ -31,6 +43,8 @@ const FolderComponent = () => {
             }
         </div>
     )
+
+
 }
 
 export default FolderComponent

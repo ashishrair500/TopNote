@@ -30,7 +30,7 @@ const ShowItems = ({ title, items, type }) => { //props receiving from the HomeC
       <h4 className='text-center border-bottom'>{title}</h4>
       <div className="row gap-2 p-4 flex-wrap">
         {items.map((item, index) => {
-      //   if(item && item.data){
+      // if(item && item.data){
           return (
             <p
               key={index * 55}
@@ -42,10 +42,10 @@ const ShowItems = ({ title, items, type }) => { //props receiving from the HomeC
               ) : (
                 <FontAwesomeIcon icon={faFileAlt} size='4x' className='mb-3' />
               )}
-              {item.data.name}
+              {item.data?.name}
             </p>
           );
-    //        }
+    //     }
         })}
       </div>
 
