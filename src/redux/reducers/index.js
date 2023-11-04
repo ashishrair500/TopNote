@@ -1,5 +1,5 @@
-import authReducer from "./authReducer.js"
-import fileFoldersReducer from "./fileFoldersReducer.js";
+import authReducer from "./authReducer"
+import fileFoldersReducer from "./fileFoldersReducer";
 import { combineReducers } from "redux";
 
 

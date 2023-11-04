@@ -67,7 +67,7 @@ useEffect(() => {
                                     className="my-0"   >
                                     {currentFile?.data.name.length > 40 ?
                                         currentFile?.data.name.slice(0, 40) + "... ." +
-                                        currrentFile?.data.extention :
+                                        currentFile?.data.extention :
                                         currentFile?.data.name
                                     }
                                 </p>
