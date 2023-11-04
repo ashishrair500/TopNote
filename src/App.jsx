@@ -1,35 +1,34 @@
+
+import { useEffect } from 'react'
+
+import { Route, Routes } from 'react-router-dom'
 import './App.css'
-import { Route, Routes } from "react-router-dom";
-import { useDispatch } from 'react-redux';
-import {Login ,Register,DashboardPage,HomePage} from "./pages";
-import { useEffect } from 'react';
-import { checkIsLoggedIn } from './redux/actionCreators/authActionCreator';
+import { useDispatch } from 'react-redux'
+import {Login, Register,HomePage,DashboardPage} from "./pages/index.js"
+import React from 'react'
+import { checkIsLoggedIn } from './redux/actionCreators/authActionCreator'
+import { ToastContainer  } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
 
-const  App=()=> {
-
-const dispatch=useDispatch();
-
-
-//to check whether the user is logged in or not
-//jaise hi koi app ko refresh karega ya back karega app.js dobara render hoga or 
-useEffect(()=>{
-  dispatch(checkIsLoggedIn());
-  
-},[]);
-
+const App =() => {
+    const dispatch = useDispatch();
+     useEffect(() => { 
+      dispatch(checkIsLoggedIn());
+    }, []);
   return (
+    <div className='App'>
+    <ToastContainer/>
+    <Routes>
+     <Route path='/' element={ <HomePage/>}/>
+     <Route path='/login' element={<Login/>}/>
+     <Route path='/register' element={<Register/>}/>
+     <Route path='/dashboard/*' element={<DashboardPage/>}/>
     
-      <div>
-        <Routes>
-          <Route path="/" element={<HomePage/>}></Route>
-          <Route path="/login" element={<Login/>}></Route>
-          <Route path="/register" element={<Register/>}></Route>
-          <Route path="/dashboard/*" element={<DashboardPage/>}></Route> 
 
-        </Routes>
-      </div>
       
-                                                                           
+    </Routes>
+     
+    </div>
   )
 }
 
