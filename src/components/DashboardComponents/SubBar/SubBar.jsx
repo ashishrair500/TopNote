@@ -1,74 +1,128 @@
-import "./SubBar.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFileUpload, faFileAlt, faFolderPlus } from "@fortawesome/free-solid-svg-icons";
-import DashboardPage from "../../../pages/DashboardPage/DashboardPage";
-import { Link } from "react-router-dom";
-import { shallowEqual, useSelector } from "react-redux";
+import "./Subbar.css"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faFileAlt, faFileUpload, faFolderPlus } from '@fortawesome/free-solid-svg-icons'
+import { Link } from 'react-router-dom'
+import { shallowEqual, useSelector, useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { changeFolder } from '../../../redux/actionCreators/fileFoldersActionCreator'
 
-const SubBar = ({ setIsCreateFolderModalOpen }) => {
-    const { userFolders, user, currentFolder } = useSelector(
-        (state) => ({
-          //jo folder abhi open hai dashboard me uske ander jitne folder hai bo ha "userFolder" , jis user ke hai bo hai "user" or jis folder me uska name hai "currentFolder"  or ye sab help karenge new folder banane me;       useSelector ki help se redux se la rahe hai
-    
-    
-          userFolders: state.filefolders.userFolders,
-          user: state.auth.user,
-          currentFolder: state.filefolders.currentFolder,
-        }),
-        shallowEqual
-    
-      );
+const Subbar = ({
+    setIsCreateFolderOpen,
+    setIsCreateFileOpen,
+    setIsFileUploadOpen,
+}) => {
 
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
 
-console.log(user.uid+" from subbar folder")
+    const { currentFolder, user,currentFolderData, userFolders } = useSelector((state) => ({
+        currentFolder: state.filefolders.currentFolder,
+        currentFolderData: state.filefolders.userFolders.find(
+            (folder) => folder.docId === state.filefolders.currentFolder),
+        userFolders: state.filefolders.userFolders,
+        user: state.auth.user,
+
+    }), shallowEqual);
+
+    const handleNavigate = (link, id) => {
+        navigate(link);
+        dispatch(changeFolder(id));
+
+    }
 
     return (
-        <nav className="navbar navbar-expand-lg navbar-light bg-white py-2 px-5">
-          <nav className="ms-5" aria-label="breadcrumb">
-            <ol className="breadcrumb">
-              <li className="breadcrumb-item">
-                <Link to="/dashboard">root</Link>
-              </li>
-              <li className="breadcrumb-item active" aria-current="page">
-                New Folder
-              </li>
-            </ol>
-          </nav>
-      
-          {user.uid === "T3XBsF3xtDMgTRQIi7xVQYqffpe2" ? (
+        <nav className="navbar navbar-expand-lg mt-2 navbar-light bg-white py-2 ">
+            <nav className="ms-5" aria-label="breadcrumb ">
+                <ol className="breadcrumb  d-flex align-items-center">
+                    {currentFolder !== "root" ? (
+
+                        <>
+                            <button
+                                className="breadcrumb-item btn btn-link  text-decoration-none"
+                                onClick={()=>handleNavigate("/dashboard","root")}
+                            >
+                                Root
+                            </button>
+                            {currentFolderData?.data.path.map((folder, index) => (
+                                <button
+                                    key={index}
+                                    className="breadcrumb-item btn btn-link   text-decoration-none"
+                                    onClick={() =>
+                                        handleNavigate(
+                                            `/dashboard/folder/${userFolders.find((fldr) => folder === fldr.docId).docId}`,
+                                            userFolders.find((fldr) => folder === fldr.docId).docId)}
+                                >
+                                    {userFolders.find((fldr) => folder === fldr.docId).data.name}
+                                </button>
+                            )
+
+
+                            )}
+                            <li className="breadcrumb-item active" >
+                                {currentFolderData?.data.name}
+                            </li>
+                        </>
+                    )
+                        : (
+                            <>
+                                <li className="breadcrumb-item active" >
+                                    Root
+                                </li>
+                            </>
+
+                        )
+
+                    }
+                </ol>
+            </nav>
+
+
+
+
+
+            {user.uid === "T3XBsF3xtDMgTRQIi7xVQYqffpe2" ? (
             <>
-              <ul className="navbar-nav ms-auto">
-                <li className="nav-item">
-                  <button className="btn btn-outline-dark mx-2 px-1">
-                    <FontAwesomeIcon icon={faFileUpload} /> &nbsp; Upload File
-                  </button>
-                </li>
-                <li className="nav-item">
-                  <button className="btn btn-outline-dark mx-2">
-                    <FontAwesomeIcon icon={faFileAlt} /> &nbsp; Create File
-                  </button>
+              <ul className="navbar-nav ms-auto  me-4">
+                <li className="nav-item mx-2">
+                    <button className="btn btn-outline-dark"
+                        onClick={() => setIsFileUploadOpen(true)}
+                    >
+                        <FontAwesomeIcon icon={faFileUpload} /> &nbsp; Upload File
+
+                    </button>
                 </li>
                 <li className="nav-item mx-2">
-                  <button
-                    className="btn btn-outline-dark mx-2"
-                    onClick={() => setIsCreateFolderModalOpen(true)}
-                  >
-                    <FontAwesomeIcon icon={faFolderPlus} /> &nbsp; Create Folder
-                  </button>
+                    <button className="btn btn-outline-dark"
+
+                        onClick={() => setIsCreateFileOpen(true)}>
+                        <FontAwesomeIcon icon={faFileAlt} /> &nbsp; Create File
+                    </button>
                 </li>
-              </ul>
+
+                <li className="nav-item ms-2">
+                    <button className="btn btn-outline-dark"
+                        onClick={() => setIsCreateFolderOpen(true)}>
+
+                        <FontAwesomeIcon icon={faFolderPlus} /> &nbsp; Create Folder
+                    </button>
+                </li>
+
+            </ul>
             </>
           ) : (
             <ul className="navbar-nav ms-auto">
             <li className="nav-item mx-2">
-            <a href="https://google.com" target="_blank" class="btn btn-primary">Go to Google</a>
+            <a href="https://forms.gle/v6PXeXPVk3W57sgt5" target="_blank" class="btn btn-primary">Go to Google</a>
                   
                 </li>
                 </ul>
           )}
+
+
+
         </nav>
-      );
-      
+
+    )
 }
 
-export default SubBar
+export default Subbar

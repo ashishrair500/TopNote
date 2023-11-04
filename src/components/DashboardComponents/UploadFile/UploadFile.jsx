@@ -1,19 +1,20 @@
 
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { shallowEqual, useSelector,useDispatch } from 'react-redux'
-import { createFolder } from '../../../redux/actionCreators/fileFoldersActionCreator'
+import { uploadFile } from '../../../redux/actionCreators/fileFoldersActionCreator'
 import { toast } from 'react-toastify';
 
-const CreateFolder = ({setIsCreateFolderOpen}) => {
+const UploadFile = ({setIsFileUploadOpen}) => {
 
 
-    const [FolderName, setFolderName] = useState('')
-
-    const{ userFolders , user, currentFolder, currentFolderData} = useSelector(
+    const [file, setFile] = useState(null)
+    const [success, setSuccess] = useState(false)
+    const dispatch = useDispatch();
+    const{ userFiles , user, currentFolder, currentFolderData} = useSelector(
       (state) => ({
-      userFolders : state.filefolders.userFolders,
+      userFiles : state.filefolders.userFiles,
       user : state.auth.user,
       currentFolder : state.filefolders.currentFolder,
       currentFolderData : state.filefolders.userFolders.find(
@@ -22,14 +23,24 @@ const CreateFolder = ({setIsCreateFolderOpen}) => {
     shallowEqual
     
     );
-    const dispatch = useDispatch();
+  
 
-    const checkFolderAlreadyPresent = (name) => {
+    useEffect(() => {
+      if(success){
+        setIsFileUploadOpen(false)
+        setFile('')
+        setSuccess(false)
+      }
+    }, [success])
 
-     const folderPresent = userFolders
-     .filter((folder)=>
-     folder.data.parent === currentFolder).find((fldr)=> fldr.data.name === name);
-      if(folderPresent){
+
+    const checkFileAlreadyPresent = (name ) => {
+    
+
+     const filePresent = userFiles
+     .filter((file)=>
+     file.data.parent === currentFolder).find((fldr)=> fldr.data.name === name);
+      if(filePresent){
         return true;
       }
       else{
@@ -39,37 +50,43 @@ const CreateFolder = ({setIsCreateFolderOpen}) => {
     const handleSubmit = (e) => {
 
       e.preventDefault()
-      if(FolderName)  {
+      
+      if(file)  {
        
-        if(FolderName.length > 3 ){
-          if(!checkFolderAlreadyPresent(FolderName)){
+       
+          
+          if(!checkFileAlreadyPresent(file.name)){
+
              
             const data = {
               createdAt : new Date(),
-              name : FolderName,
+              name : file.name,
               userId : user.uid,
-              createdBy :  user.displayName,
+              createdBy : user.displayName,
               path : currentFolder === "root" ? [] : [ ...currentFolderData?.data.path,currentFolder],
               parent : currentFolder ,
               lastAccessed : null,
               updatedAt : new Date(),
+              extension :file.name.split('.')[1],
+              data : null,
+              url :''
 
             };
            
         
-            dispatch(createFolder(data))
-
+            dispatch(uploadFile(file,data,setSuccess))
+           
           }
           else{
-            toast.error('Folder already present')
+            toast.error('File already present')
           }
-        }
-        else{
-            toast.error('Folder name must be greater than 3 characters')
-        }
+        
+    
       }else{
-            toast.error('Folder name is required')
+            toast.error('File name is required')
       }
+
+
     }
   return (
     <div
@@ -81,8 +98,9 @@ const CreateFolder = ({setIsCreateFolderOpen}) => {
         <div className='row align-items-center justify-content-center'>
         <div className='col-md-4 mt-5 bg-white rounded p-4'>
         <div  className='d-flex justify-content-between'>
-        <h4>Create Folder </h4>
-        <button className='btn' onClick={()=> setIsCreateFolderOpen(false)}> 
+        <h4>Upload File </h4>
+        <button className='btn'
+         onClick={()=> setIsFileUploadOpen(false)}> 
             <FontAwesomeIcon icon={faTimes}
             className='text-black'
             size='sm'
@@ -95,18 +113,17 @@ const CreateFolder = ({setIsCreateFolderOpen}) => {
         <form  className='mt-3 w-100'  onSubmit={handleSubmit}>
         <div className='form-group'>
             <input
-            type='text'
+            type='file'
             className='form-control'
-            id='folderName'
-            placeholder='Folder Name'
-            value={FolderName}
-            onChange={(e)=> setFolderName(e.target.value)}
+            id='file'
+           
+            onChange={(e)=> setFile(e.target.files[0])}
             />
 
              
         </div>
             <button type='submit' className='btn btn-primary mt-5 form-control'>
-                Create Folder
+                Upload File
             </button>
         </form>
             
@@ -118,4 +135,4 @@ const CreateFolder = ({setIsCreateFolderOpen}) => {
   )
 }
 
-export default CreateFolder
+export default UploadFile
