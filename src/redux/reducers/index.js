@@ -1,8 +1,7 @@
 import fileFoldersReducer from "./fileFoldersReducer";
  
 import { combineReducers } from "redux";
-
-//import authReducer from "./authReducer";
+import authReducer from "./authReducer";
 
 
 const rootReducer =
