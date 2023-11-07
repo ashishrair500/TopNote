@@ -112,7 +112,7 @@ const Subbar = ({
           ) : (
             <ul className="navbar-nav ms-auto">
             <li className="nav-item mx-2">
-            <a href="https://forms.gle/v6PXeXPVk3W57sgt5" target="_blank" class="btn btn-primary">Go to Google</a>
+            <a href="https://forms.gle/v6PXeXPVk3W57sgt5" target="_blank" className="btn btn-primary">Go to Google</a>
                   
                 </li>
                 </ul>

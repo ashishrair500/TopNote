@@ -30,7 +30,7 @@ const Header = ({ fileName,fileId,fileData,prevFileData }) => {
                     <button className="btn btn-success" 
                     disabled={fileData = prevFileData}
                     onClick={()=>{
-                        dispatch(updateFileData({fileId , fileData}))
+                        dispatch(updateFileData(fileId , fileData))
                     }
                     }
                     >
