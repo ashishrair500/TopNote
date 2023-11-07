@@ -1,2 +1,2 @@
-export { default  as NavigationComponent } from "./navigation";
+export { default  as NavigationComponent } from "./Navigation";
 

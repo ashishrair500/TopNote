@@ -10,6 +10,8 @@ const {isAuthenticated,user} = useSelector(state => state.auth)
 
 const dispatch = useDispatch();
 
+
+
   return  <nav className='navbar navbar-expand-lg navbar-dark bg-dark '>
     <Link className='navbar-brand ms-5 ' to='/'>
         Notes Adda 
@@ -17,13 +19,12 @@ const dispatch = useDispatch();
     <ul className='navbar-nav ms-auto me-5'>
     {
       isAuthenticated ? (
-
           <>
           <li className='nav-item mx-2'>
           
           <p className='my-0 mt-1'>
             <span className='text-light' >Welcome, </span>
-            <span  className='text-warning'>{user.name}</span>
+            <span  className='text-warning'>{user.displayName}</span>
           </p>
        </li>
           <li className='nav-item mx-2'>
@@ -59,4 +60,4 @@ const dispatch = useDispatch();
   </nav>
 };
 
-export default NavigationComponent
+export default NavigationComponent;
