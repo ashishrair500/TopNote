@@ -60,4 +60,4 @@ const dispatch = useDispatch();
   </nav>
 };
 
-export default NavigationComponent;
+export default NavigationComponent
