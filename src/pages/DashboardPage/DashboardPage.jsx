@@ -12,6 +12,8 @@ import FolderComponent from '../../components/DashboardComponents/FolderComponen
 import CreateFile from '../../components/DashboardComponents/CreateFile/CreateFile';
 import FileComponent from '../../components/DashboardComponents/FileComponent/FileComponent';
 import UploadFile from '../../components/DashboardComponents/UploadFile/UploadFile';
+
+
 const DashboardPage = () => {
 
   const [isCreateFolderOpen, setIsCreateFolderOpen] = useState(false);

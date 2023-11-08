@@ -1,7 +1,6 @@
 import "./Subbar.css"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFileAlt, faFileUpload, faFolderPlus } from '@fortawesome/free-solid-svg-icons'
-import { Link } from 'react-router-dom'
 import { shallowEqual, useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { changeFolder } from '../../../redux/actionCreators/fileFoldersActionCreator'
