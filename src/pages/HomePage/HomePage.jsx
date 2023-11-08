@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { NavigationComponent } from '../../components/HomePageComponents';
+import NavigationComponent  from '../../components/HomePageComponents/navigation';
 //from '../../components/HomePageComponents/index.js'
 
 const HomePage = () => {
