@@ -83,7 +83,7 @@ useEffect(() => {
 {
 
 showSubBar && (
-  <Subbar   
+  <SubBar   
       setIsCreateFolderOpen={setIsCreateFolderOpen} 
       setIsCreateFileOpen={setIsCreateFileOpen} 
       setIsFileUploadOpen={setIsFileUploadOpen}
