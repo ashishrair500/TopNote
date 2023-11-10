@@ -1,4 +1,4 @@
-import "./Subbar.css"
+import "./SubBar.css"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFileAlt, faFileUpload, faFolderPlus } from '@fortawesome/free-solid-svg-icons'
 import { shallowEqual, useSelector, useDispatch } from 'react-redux'
