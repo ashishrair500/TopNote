@@ -33,12 +33,14 @@ const HomeComponent = () => {
         type={"folder"} 
         items={userFolders}
         />
-        <ShowItems 
+         {/*
+         hiding it because created file is not needed<ShowItems 
         title={"Created Files"} 
         type={"file"} 
         items={
           userFiles.filter((file)=> file.data.url === null)
         }/>
+        */}
 
 <ShowItems 
         title={"Uploaded Files"} 
