@@ -22,13 +22,9 @@ const dispatch = useDispatch();
           <li className='nav-item mx-2'>
           <p className='my-0 mt-1'>
             <span className='text-light'>Welcome {user.displayName}</span></p>
-       </li>
-    <li className='nav-item mx-2'>
-        <Link className='btn btn-primary btn-sm' to='/dashboard'>
+       </li><li className='nav-item mx-2'><Link className='btn btn-primary btn-sm' to='/dashboard'>
             Dashboard
-        </Link></li>
-    <li className='nav-item'>
-    <button className='btn btn-success btn-sm' 
+        </Link></li><li className='nav-item'><button className='btn btn-success btn-sm' 
         onClick={() => dispatch(signOutUser())} >
            LogOut
         </button>
