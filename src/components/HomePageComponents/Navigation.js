@@ -19,9 +19,8 @@ const dispatch = useDispatch();
       isAuthenticated ? (
           <>
           <li className='nav-item mx-2'>
-          
           <p className='my-0 mt-1'>
-            <span className='text-light'>Welcome, </span>
+            <span className='text-light'>Welcome,</span>
             <span className='text-warning'>{user.displayName}</span>
           </p>
        </li>
@@ -34,11 +33,8 @@ const dispatch = useDispatch();
         onClick={() => dispatch(signOutUser())} >
            LogOut
         </button>
-
         </li>
-
           </>
-
       ) : (
           <>
           <li className='nav-item mx-2'>
@@ -49,7 +45,6 @@ const dispatch = useDispatch();
         <Link className='btn btn-success btn-sm' to='/register'>
            Register
         </Link>
-
         </li>
           </>
       )
