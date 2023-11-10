@@ -2,7 +2,8 @@ import { useEffect } from 'react'
 import { shallowEqual, useSelector , useDispatch  } from 'react-redux'
 import { useNavigate, useLocation } from 'react-router-dom';
 import Navbar from '../../components/DashboardComponents/Navbar/Navbar';
-import Subbar from '../../components/DashboardComponents/Subbar/Subbar';
+//import Subbar from '../../components/DashboardComponents/Subbar/Subbar';
+import SubBar from '../../components/DashboardComponents/SubBar/SubBar'
 import HomeComponent from '../../components/DashboardComponents/HomeComponent/HomeComponent';
 import { useState } from 'react';
 import CreateFolder from '../../components/DashboardComponents/CreateFolder/CreateFolder';
