@@ -8,13 +8,14 @@ const HomeComponent = () => {
    
  
 
-  const{isLoading,userFolders,userFiles} = useSelector(
+  const{isLoading,userFolders,userFiles,currentFolder} = useSelector(
     (state) => ({
       isLoading: state.filefolders.isLoading,
       userFolders : state.filefolders.userFolders.filter(
         (folder)=> folder.data.parent === "root"),
       userFiles : state.filefolders.userFiles.filter(
         (file)=> file.data.parent === "root"),
+          currentFolder:state.filefolders.currentFolder,
     }
   ), shallowEqual);
 
@@ -41,14 +42,17 @@ const HomeComponent = () => {
           userFiles.filter((file)=> file.data.url === null)
         }/>
         */}
-
+         {
+          currentFolder!=="root"?(
 <ShowItems 
         title={"Uploaded Files"} 
         type={"file"} 
         items={
           userFiles.filter((file)=> file.data.data === null)
-        }/>
-
+        }/>):(
+           <h1></h1>
+        )
+         }
 
 
 
