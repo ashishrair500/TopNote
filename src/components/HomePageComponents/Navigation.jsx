@@ -21,7 +21,7 @@ const NavigationComponent = () => {
               <li className='nav-item mx-2'>
                 <p className='my-0 mt-1 mx-2'>
                   <span className='text-light'>Welcome: </span>
-                  <span className='text-warning'>{user.displayName.toUpperCase}</span>
+                  <span className='text-warning'>{user.displayName.toUpperCase()}</span>
                 </p>
               </li>
               <li className='nav-item mx-2'>
