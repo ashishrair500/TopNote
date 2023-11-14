@@ -75,9 +75,7 @@ useEffect(() => {
                                     <button className='btn btn-sm btn-outline-light me-3'
                                         onClick={() => navigate(-1)}> Go Back</button>
 
-                                    <button className='btn btn-primary   me-3  '
-                                    onClick={() =>  downloadFile()}
-                                    >Download</button>
+                                   
                                 </div>
 
 
@@ -107,8 +105,12 @@ useEffect(() => {
 
                                   <p className='text-center'>
 
-                                   File Preview Not Available , Please Download the file to view it
+                                 Please click to download and to preview in browser view
+
                                                 </p>
+                                                 <button className='btn btn-primary   me-3  '
+                                    onClick={() =>  downloadFile()}
+                                    >Download</button>
                                             </div>
                                         )
 
