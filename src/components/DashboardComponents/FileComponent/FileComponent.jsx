@@ -103,11 +103,11 @@ useEffect(() => {
                                         (
                                             <div className='w-100 h-100 d-flex justify-content-center align-items-center'>
 
-                                  <p className='text-center'>
+                                  <h1 className='text-center'>
 
                                  Please click to download and to preview in browser view
 
-                                                </p>
+                                                </h1>
                                                  <button className='btn btn-primary   me-3  '
                                     onClick={() =>  downloadFile()}
                                     >Download</button>
