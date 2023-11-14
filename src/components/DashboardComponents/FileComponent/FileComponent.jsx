@@ -84,7 +84,7 @@ useEffect(() => {
                   <div className='w-100 mt-4' style={{ height: '650px', width: 'auto' }}>
 
                               {
-                                    currentFile?.data.extension.includes('pdf') ||
+                                   // currentFile?.data.extension.includes('pdf') ||
                                         currentFile?.data.extension.includes('docx') ||
                                         currentFile?.data.extension.includes('ppt') ||
                                         currentFile?.data.extension.includes('jpg') ||
